@@ -1,0 +1,20 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+        # Count the frequency of each character
+        freq = {}
+        for char in s:
+            if char in freq:
+                freq[char] += 1
+            else:
+                freq[char] = 1
+
+        # Count the number of pairs and whether there is any character left unpaired
+        pairs = 0
+        unpaired = False
+        for count in freq.values():
+            pairs += count // 2
+            if count % 2 == 1:
+                unpaired = True
+
+        # The length of the longest palindrome is the number of pairs times 2 plus 1 if there is any character left unpaired
+        return pairs * 2 + 1 if unpaired else pairs * 2
