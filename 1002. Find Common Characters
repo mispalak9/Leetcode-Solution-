@@ -1,0 +1,15 @@
+class Solution(object):
+    def commonChars(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        from collections import Counter
+        # Initialize min_count with the frequency count of the first word
+        min_count = Counter(words[0])
+        for word in words[1:]:
+            # Update min_count with the minimum count for each character
+            min_count &= Counter(word)
+        # Return the characters that show up in all words
+        return list(min_count.elements())
+        
