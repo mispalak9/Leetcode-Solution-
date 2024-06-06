@@ -1,0 +1,21 @@
+class Solution(object):
+    def isNStraightHand(self, hand, groupSize):
+        """
+        :type hand: List[int]
+        :type groupSize: int
+        :rtype: bool
+        """
+        from collections import Counter
+        count = Counter(hand)
+        while count:
+            m = min(count)
+            for k in range(m, m + groupSize):
+                v = count[k]
+                if not v:
+                    return False
+                if v == 1:
+                    del count[k]
+                else:
+                    count[k] = v - 1
+        return True
+        
