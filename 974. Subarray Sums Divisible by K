@@ -1,0 +1,20 @@
+class Solution(object):
+    def subarraysDivByK(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        count = 0
+        prefix = [0] * k
+        prefix[0] = 1  # account for the initial prefix sum of 0
+        sum = 0
+        for num in nums:
+            sum += num
+            mod = sum % k
+            if mod < 0:
+                mod += k
+            count += prefix[mod]
+            prefix[mod] += 1
+        return count
+        
