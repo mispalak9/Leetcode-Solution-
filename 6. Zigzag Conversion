@@ -1,0 +1,30 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if (numRows == 1 || numRows >= s.size()) {
+            return s; // No zigzag needed
+        }
+        
+        vector<string> rows(min(numRows, (int)s.size())); // Create rows
+        int curRow = 0; // Current row
+        bool goingDown = false; // Direction flag
+        
+        // Fill the rows in a zigzag manner
+        for (char c : s) {
+            rows[curRow] += c; // Place the character in the current row
+            // Change direction if we hit the top or bottom row
+            if (curRow == 0 || curRow == numRows - 1) {
+                goingDown = !goingDown; // Change direction
+            }
+            curRow += goingDown ? 1 : -1; // Move to the next row
+        }
+        
+        // Concatenate all rows to get the final result
+        string result;
+        for (const string& row : rows) {
+            result += row;
+        }
+        
+        return result;
+    }
+};
