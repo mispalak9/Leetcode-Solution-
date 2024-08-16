@@ -1,0 +1,22 @@
+class Solution(object):
+    def maxDistance(self, arrays):
+        """
+        :type arrays: List[List[int]]
+        :rtype: int
+        """
+        # Initialize min and max values
+        min_val = float('inf')
+        max_val = float('-inf')
+        
+        # Iterate through each array to find the overall min and max
+        for array in arrays:
+            min_val = min(min_val, array[0])  # First element of the sorted array
+            max_val = max(max_val, array[-1])  # Last element of the sorted array
+        
+        # The maximum distance will be between the overall min and max
+        return max_val - min_val
+
+# Example usage
+solution = Solution()
+arrays = [[1, 2, 3], [4, 5], [1, 2, 3]]
+print(solution.maxDistance(arrays))  # Output: 4
