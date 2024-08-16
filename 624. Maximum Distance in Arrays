@@ -4,19 +4,23 @@ class Solution(object):
         :type arrays: List[List[int]]
         :rtype: int
         """
-        # Initialize min and max values
-        min_val = float('inf')
-        max_val = float('-inf')
+        # Initialize the minimum and maximum values from the first array
+        min_val = arrays[0][0]
+        max_val = arrays[0][-1]
+        max_distance = 0
         
-        # Iterate through each array to find the overall min and max
-        for array in arrays:
-            min_val = min(min_val, array[0])  # First element of the sorted array
-            max_val = max(max_val, array[-1])  # Last element of the sorted array
+        # Iterate through the arrays starting from the second one
+        for i in range(1, len(arrays)):
+            # Calculate the distance with the current array's min and max
+            max_distance = max(max_distance, abs(arrays[i][-1] - min_val), abs(max_val - arrays[i][0]))
+            
+            # Update the min and max values
+            min_val = min(min_val, arrays[i][0])
+            max_val = max(max_val, arrays[i][-1])
         
-        # The maximum distance will be between the overall min and max
-        return max_val - min_val
+        return max_distance
 
 # Example usage
 solution = Solution()
-arrays = [[1, 2, 3], [4, 5], [1, 2, 3]]
-print(solution.maxDistance(arrays))  # Output: 4
+arrays = [[1, 4], [0, 5]]
+print(solution.maxDistance(arrays))  # Output: 5
